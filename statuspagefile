@@ -11,12 +11,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     </head>
-<DIV style="position: absolute; top:20px; left:750px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
-  </DIV>
- <DIV style="position: absolute; top:100px; left:750px; width:10px; height:50px"><h1><p id="demo2"></p></h1>
-  </DIV><DIV style="position: absolute; top:180px; left:750px; width:10px; height:50px"><h1><p id="demo3"></p></h1>
-  </DIV>
-18<link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet" type="text/css" />
+  
+  
+  
+  <div style="position: absolute; top:20px; left:600px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
+  </div>
+ 
+  <div style="position: absolute; top:95px; left:600px; width:10px; height:50px"><h1><p id="demo2"></p></h1>
+  </div>
+  
+  <div style="position: absolute; top:165px; left:600px; width:10px; height:50px"><h1><p id="demo3"></p></h1>
+  </div>
+ 
+  <div style="position: absolute; top:10px; left:750px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
+  </div>
+  
+  <div style="position: absolute; top:95px; left:750px; width:10px; height:50px"><h1><p>Hrs</p></h1>
+  </div>
+  
+  <div style="position: absolute; top:165px; left:750px; width:10px; height:40px"><h1><p>mAh</p></h1>
+  </div>
+    <div style="position: absolute; top:350px; left:245px; width:1000px; height:40px"><h3><p>Stored Beam Current and Lifetime</p></h3>
+  </div>
+ 
+  <link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-git.js"></script>
 <script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
 
@@ -132,7 +150,7 @@ var text = svgContainer1.append('text')
 
     });
   </script>
-  /////////////////////////////////////////////////////
+
   <script>
   
 
@@ -222,39 +240,6 @@ document.getElementById("demo3").innerHTML = Math.floor(DAHV * 100)/100;
 .attr("height",250)
    .attr("fill", "white");
   
-  
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-      
-
-     
- 
-  
-  
-
-  
-  
-  
-  //all of the dynamic varibles that effectivly change what is being represented on the web page
-      
-      
-//
 
 
   var text3 = svgContainer3.append('text')
@@ -281,47 +266,11 @@ document.getElementById("demo3").innerHTML = Math.floor(DAHV * 100)/100;
   
 
 
-  
-  
-
-  
-    
-  var text7 = svgContainer3.append('text')
-.attr('x', 750)
-.attr('y', 125)
-.text(BCV)
-.attr('fill','black')
-.attr("font-size", "35px");
-  
-  
-  
-  
-  
-  var text8 = svgContainer3.append('text')
-.attr('x', 750)
-.attr('y', 200)
-.text(DAHV)
-.attr('fill','black')
-.attr("font-size", "35px");
-//the containers and values for the Beam Lifetime, Beam Current, and Daily Amp Hours
-
 
 
   
   </script>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   
   
   <script>
