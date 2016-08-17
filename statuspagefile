@@ -392,12 +392,322 @@ var text = svgContainer1.append('text')
          .attr("width", 1210)    
          .attr("height", 150);
 
-  </script>
+    </script>
 <br>
 </br>
 <div class="container">
 
 
+
+  
+
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<script src="https://code.jquery.com/jquery-git.js"></script>
+  <style>
+ 
+
+.line1 {
+    fill: none;
+    stroke: blue;
+    stroke-width: 1.5px;
+}
+.line2 {
+    fill: none;
+    stroke: #CC230F;
+    stroke-width: 1.5px;
+}
+.yAxis2  {
+    fill: none;
+    stroke: #CC230F;
+    stroke-width: .9px;
+    shape-rendering: crispEdges;
+}
+.yAxis1  {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+   stroke-width: .75px;
+}
+.xAxis  {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+    stroke-width: .75px;
+}
+
+  </style>
+  </head>
+  <body>
+<script>
+var n = 1000,
+    duration = 1000,
+    now = new Date(Date.now() - duration),
+    random = d3.random.normal(0, 0.2),
+    count = 0,
+    data1 = d3.range(n).map(random),
+    data2 = d3.range(n).map(random);
+
+var margin = {
+    top: 20,
+    right: 70,
+    bottom: 20,
+    left: 70
+},
+    width = 900 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
+
+var x = d3.time.scale()
+    .domain([now - (n - 2) * duration, now - duration])
+    .range([0, width]);
+
+var y1 = d3.scale.linear()
+    .domain([0, 400])
+    .range([height, 0]);
+
+var y2 = d3.scale.linear()
+    .domain([0, 30])
+    .range([height, 0]);
+
+var line1 = d3.svg.line()
+    .interpolate("basis")
+    .x(function (d, i) {
+    return x(now - (n - 1 - i) * duration);
+})
+    .y(function (d, i) {
+    return y1(d);
+});
+
+
+var line2 = d3.svg.line()
+    .interpolate("basis")  
+    .x(function (d, i) {
+    return x(now - (n - 1 - i) * duration);
+})
+    .y(function (d, i) {
+    return y2(d);
+});
+
+
+
+
+
+
+
+
+
+
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + height)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.append("defs").append("clipPath")
+    .attr("id", "clip")
+    .append("rect")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("text")    
+        .attr("x", 400 )
+        .attr("y",  600 )
+        .style("text-anchor", "middle")
+        .text("Time")
+     .style("stroke", "black")   
+  .style("stroke-width", ".5px")     
+  .style("font-size", "15px")
+  .attr("font-family", "sans-serif");
+
+
+svg.append("text")    
+        .attr("x", -280 )
+        .attr("y", -50 )
+        .style("text-anchor", "middle")
+        .text("Current (Ma)")
+   .style("stroke", "blue")   
+.style("stroke-width", ".5px")
+  .style("font-size", "15px")
+        .attr("transform", "rotate(-90)")
+.attr("font-family", "sans-serif");
+       
+
+svg.append("text")   
+        .attr("x", -280 )
+        .attr("y", 810 )
+        .style("text-anchor", "middle")
+        .text("Lifetime (Hr)")
+   
+  .style("stroke-width", ".5px")     
+  .style("font-size", "15px")
+        .attr("transform", "rotate(-90)")
+  .style("stroke", "#CC230F")
+.attr("font-family", "sans-serif");
+
+
+       
+
+       
+
+var axis = svg.append("g")
+    .attr("class", "xAxis")
+ .style("font-size", "10px")
+ .style("stroke", "black")
+.style("stroke-width", ".75px")
+.attr("font-family", "sans-serif")
+.attr("transform", "translate(0," + height + ")")
+    .call(x.axis = d3.svg.axis().scale(x).orient("bottom"));
+
+var yAxis1 = svg.append("g")
+ .style("font-size", "10px")
+.style("stroke", "blue")
+.style("stroke-width", ".75px")
+.attr("font-family", "sans-serif")   
+.attr("class", "yAxis1")
+.call(y1.axis = d3.svg.axis().scale(y1).ticks(10).tickSize(10).tickSubdivide(50).tickPadding(10).orient("left"));
+   
+var y1Axis1 = svg.append("g")
+ .style("font-size", "10px")
+.style("stroke", "blue")
+.style("stroke-width", ".75px")
+.attr("font-family", "sans-serif")   
+.attr("class", "yAxis1")
+.call(y1.axis = d3.svg.axis().scale(y1).ticks(50).tickSize(5).tickFormat("").tickSubdivide(50).tickPadding(10).orient("left"));
+
+
+var yAxis2 = svg.append("g")
+ .style("font-size", "10px")
+.style("stroke", "#CC230F")
+.attr("font-family", "sans-serif")   
+.attr("class", "yAxis2")
+    .call(y2.axis = d3.svg.axis().scale(y2).ticks(10).tickSize(10).tickSubdivide(50).tickPadding(10).orient("right"))
+    .attr('transform', 'translate(760, 0)');
+
+var y2Axis2 = svg.append("g")
+ .style("font-size", "10px")
+.style("stroke", "#CC230F")
+.style("stroke-width", ".75px")
+.attr("font-family", "sans-serif")   
+.attr("class", "yAxis2")
+.call(y2.axis = d3.svg.axis().scale(y2).ticks(30).tickSize(5).tickFormat("").orient("right"))
+.attr('transform', 'translate(760, 0)');
+
+var path1 = svg.append("g")
+    .attr("clip-path", "url(#clip)")
+    .append("path")
+    .datum(data1)
+    .attr("class", "line1")
+
+
+var path2 = svg.append("g")
+    .attr("clip-path", "url(#clip)")
+  
+.append("path")
+    .datum(data2)
+    .attr("class", "line2");
+
+
+var transition = d3.select({}).transition()
+    .duration(10000)
+    .ease("linear");
+
+
+ 
+ 
+  tick();
+
+
+setInterval(function() {
+  
+  $.ajax({
+            url: "http://arcapp01.cs.nsls2.local:17668/retrieval/data/getData.json?pv=lastSample_36000000(SR:OPS-BI{DCCT:1}Lifetime-I)",
+            dataType: 'json',
+            success: function (value) {
+    var abc = (value[0].data[0].val);
+           console.log(abc)
+ data2.push(abc);
+           
+           
+           
+            },
+
+    });
+
+}, 4000);   
+          
+setInterval(function() {
+  
+  $.ajax({
+            url: "http://arcapp01.cs.nsls2.local:17668/retrieval/data/getData.json?pv=lastSample_36000000(SR:OPS-BI{DCCT:1}I:Real-I)",
+            dataType: 'json',
+            success: function (value) {
+    var cde = (value[0].data[0].val);
+           console.log(cde)
+
+           data1.push(cde);
+           
+           
+            },
+
+    });
+
+}, 4000);
+ 
+ 
+  function tick() {
+    transition = transition.each(function () {
+
+
+
+
+ 
+          
+            path1.attr("d", line1)
+            .attr("transform", null);
+            path1.transition()
+            .attr("transform", "translate(" + x(now - (n - 1) * duration) + ")");
+            data1.shift();
+
+     
+
+
+     
+
+           path2.attr("d", line2)
+           .attr("transform", null);     
+           path2.transition()
+           .attr("transform", "translate(" + x(now - (n - 1) * duration) + ")");
+           data2.shift();
+       
+  
+     
+
+
+
+        // slide the x-axis left, rescale the y-axis
+        axis.call(x.axis);
+ 
+
+  
+
+     
+
+    }).transition().each("start", tick);
+
+
+
+
+now = new Date();
+        x.domain([now - (n - 2) * duration, now - duration]);
+ 
+}
+ 
+
+    </script>
+    <div class="graph"></div>
+ 
+  </body>
 
 
 </body>
