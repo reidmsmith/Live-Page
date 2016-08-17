@@ -59,7 +59,7 @@
 //
       var green = "green"
       var yellow = "yellow"
-      var blue = "blue"
+      var blue = "#92D7FF"
       var red = "red"
       var purple = "purple"
       var grey = "#9c9c9c"
@@ -295,7 +295,7 @@ document.getElementById("demo3").innerHTML = Math.floor(DAHV * 100)/100;
 //
       var green = "green"
       var yellow = "yellow"
-      var blue = "blue"
+      var blue = "#92D7FF"
       var red = "red"
       var purple = "purple"
       var grey = "#9c9c9c"
