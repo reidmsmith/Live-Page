@@ -1,42 +1,45 @@
 <!DOCTYPE html>
-
-<meta name="robots" content="noindex">
 <html lang="en">
 <head>
-<script src="https://code.jquery.com/jquery.min.js"></script>
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    </head>
+  <link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-git.js"></script>
+<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>  
+  </head>
+
+ <style>
+   body{
+     background-color: #e7e8e9;
+   }
+  </style>
+
   
   
   
-  <div style="position: absolute; top:20px; left:600px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
+  <div style="position: absolute; top:10px; left:600px; width:10px; height:50px"><h1><p id="demo2"></p></h1>
   </div>
  
-  <div style="position: absolute; top:95px; left:600px; width:10px; height:50px"><h1><p id="demo2"></p></h1>
+  <div style="position: absolute; top:80px; left:600px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
   </div>
   
-  <div style="position: absolute; top:165px; left:600px; width:10px; height:50px"><h1><p id="demo3"></p></h1>
+  <div style="position: absolute; top:150px; left:600px; width:10px; height:50px"><h1><p id="demo3"></p></h1>
   </div>
  
   <div style="position: absolute; top:10px; left:750px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
   </div>
   
-  <div style="position: absolute; top:95px; left:750px; width:10px; height:50px"><h1><p>Hrs</p></h1>
+  <div style="position: absolute; top:80px; left:750px; width:10px; height:30px"><h1><p>Hrs</p></h1>
   </div>
-  
-  <div style="position: absolute; top:165px; left:750px; width:10px; height:40px"><h1><p>mAh</p></h1>
+
+  <div style="position: absolute; top:150px; left:750px; width:10px; height:30px"><h1><p>mAh</p></h1>
   </div>
-    <div style="position: absolute; top:350px; left:245px; width:1000px; height:40px"><h3><p>Stored Beam Current and Lifetime</p></h3>
+    <div style="position: absolute; top:330px; left:245px; width:400px; height:40px"><h3><p>Stored Beam Current and Lifetime</p></h3>
   </div>
  
-  <link href="https://code.jquery.com/ui/jquery-ui-git.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-git.js"></script>
-<script src="https://code.jquery.com/ui/jquery-ui-git.js"></script>
+
 
 
 
@@ -44,12 +47,12 @@
   <body>
 
   <script>  
-  $.ajax({
+ $.ajax({
             url: "http://arcapp01.cs.nsls2.local:17668/retrieval/data/getData.json?pv=lastSample_36000000(SR-OPS{}Mode-Sts)",
             dataType: 'json',
             success: function (value) {
     var aaa = (value[0].data[0].val); 
-           console.log(aaa)
+           console.log(aaa) 
 
 
   
@@ -62,7 +65,7 @@
       var blue = "#92D7FF"
       var red = "red"
       var purple = "purple"
-      var grey = "#9c9c9c"
+      var grey = " #CCCCCC"
       var pink = "pink";
       var M10 = "Operation Mode: Opperations"
       var M11 = "Operation Mode: Setup"
@@ -125,8 +128,6 @@ else if (M1S == 1){
         .attr("height", 80)
         .attr("stroke","black")
         .attr("stroke-width","3px")         .attr("fill", color1);
-                            
-
 
 //container for the rectangle, and the actual rectangles 
 
@@ -136,7 +137,7 @@ else if (M1S == 1){
 //
 var text = svgContainer1.append('text')
           .text(message1)
-          .attr('x', 350)
+          .attr('x', 340)
           .attr('y', 55)
           .attr('fill', 'black')
           .attr('font-size', "20px");
@@ -197,6 +198,14 @@ document.getElementById("demo2").innerHTML = Math.floor(BCV * 100)/100;
 
 }, 5000);
     
+    
+    
+    
+    
+    
+    
+    
+    
     </script>
     
     
@@ -226,52 +235,97 @@ document.getElementById("demo3").innerHTML = Math.floor(DAHV * 100)/100;
 
 }, 5000);
     
-    </script> 
-    
-    
-    
-    
-    
-    
-    
-    <script>
+
  var svgContainer3 = d3.select("body").append("svg")
-.attr("width",1210)
-.attr("height",250)
+.attr("width",500)
+.attr("height",220)
    .attr("fill", "white");
   
+  
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+      
+
+     
+ 
+  
+  
+
+  
+  
+  
+  //all of the dynamic varibles that effectivly change what is being represented on the web page
+      
+      
+//
 
 
   var text3 = svgContainer3.append('text')
 .attr('x',10)
 .attr('y',50)
-.text("Beam Lifetime")
+.text("Beam Current")
 .attr('fill','black')
 .attr("font-size", "35px")
 .attr("font-weight", "bold");
   
-  var text4 = svgContainer3.append('text')
+  var text4 = svgContainer3.append('text') 
 .attr('x',10)
 .attr('y',125)
-.text("Beam Current")
+.text("Beam Lifetime")
 .attr('fill','black')
 .attr("font-size", "35px");
-  
+
   var text5 = svgContainer3.append('text')
 .attr('x',10)
 .attr('y',200)
 .text("Daily Amp Hours")
 .attr('fill','black')
 .attr("font-size", "35px");
-  
 
+
+
+  
+    
+  var text7 = svgContainer3.append('text')
+.attr('x', 750)
+.attr('y', 125)
+.text(BCV)
+.attr('fill','black')
+.attr("font-size", "35px");
+  
+  
+  
+  
+  
+  var text8 = svgContainer3.append('text')
+.attr('x', 750)
+.attr('y', 200)
+.text(DAHV)
+.attr('fill','black')
+.attr("font-size", "35px");
+//the containers and values for the Beam Lifetime, Beam Current, and Daily Amp Hours
 
 
 
   
   </script>
-
-  
+ 
   
   <script>
   
@@ -298,7 +352,7 @@ document.getElementById("demo3").innerHTML = Math.floor(DAHV * 100)/100;
       var blue = "#92D7FF"
       var red = "red"
       var purple = "purple"
-      var grey = "#9c9c9c"
+      var grey = "#CCCCCC"
       var pink = "pink";
       var M10 = "Operation Mode: Opperations"
       var M11 = "Operation Mode: Setup"
@@ -358,7 +412,7 @@ else if (M1S == 1){
 
   var rectangle1 = svgContainer1.append("rect")               .attr("x", 10)
         .attr("y", 10)                     .attr("width", 900)
-        .attr("height", 80)
+        .attr("height",80)
         .attr("stroke","black")
         .attr("stroke-width","3px")         .attr("fill", color1);
                             
@@ -389,18 +443,12 @@ var text = svgContainer1.append('text')
 }, 5000);
 
   var svgContainer1 = d3.select("body").append("svg")
-         .attr("width", 1210)    
-         .attr("height", 150);
+         .attr("width", 920)    
+         .attr("height", 95);
 
-    </script>
-<br>
-</br>
+  </script>
+
 <div class="container">
-
-
-
-  
-
 <head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 <script src="https://code.jquery.com/jquery-git.js"></script>
@@ -408,7 +456,7 @@ var text = svgContainer1.append('text')
  
 
 .line1 {
-    fill: none;
+    fill: none;  
     stroke: blue;
     stroke-width: 1.5px;
 }
@@ -455,7 +503,7 @@ var margin = {
     left: 70
 },
     width = 900 - margin.left - margin.right,
-    height = 600 - margin.top - margin.bottom;
+    height = 490 - margin.top - margin.bottom;
 
 var x = d3.time.scale()
     .domain([now - (n - 2) * duration, now - duration])
@@ -512,7 +560,7 @@ svg.append("defs").append("clipPath")
 
 svg.append("text")    
         .attr("x", 400 )
-        .attr("y",  600 )
+        .attr("y",  500 )
         .style("text-anchor", "middle")
         .text("Time")
      .style("stroke", "black")   
@@ -522,7 +570,7 @@ svg.append("text")
 
 
 svg.append("text")    
-        .attr("x", -280 )
+        .attr("x", -230 )
         .attr("y", -50 )
         .style("text-anchor", "middle")
         .text("Current (Ma)")
@@ -534,7 +582,7 @@ svg.append("text")
        
 
 svg.append("text")   
-        .attr("x", -280 )
+        .attr("x", -230 )
         .attr("y", 810 )
         .style("text-anchor", "middle")
         .text("Lifetime (Hr)")
@@ -669,9 +717,8 @@ setInterval(function() {
             .attr("transform", "translate(" + x(now - (n - 1) * duration) + ")");
             data1.shift();
 
+
      
-
-
      
 
            path2.attr("d", line2)
@@ -682,7 +729,13 @@ setInterval(function() {
        
   
      
-
+     
+     
+     
+     
+     
+     
+     
 
 
         // slide the x-axis left, rescale the y-axis
@@ -706,14 +759,13 @@ now = new Date();
 
     </script>
     <div class="graph"></div>
- 
   </body>
 
 
 </body>
 <body>
    
-  <div style="position: absolute; top:1020px; left:70px; width:1000px; height:40px">
+  <div style="position: absolute; top:870px; left:70px; width:700px; height:10px">
 
   <script type="text/javascript">
 tday=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
