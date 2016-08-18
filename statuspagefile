@@ -19,7 +19,7 @@
   
   
   
-  <div style="position: absolute; top:10px; left:600px; width:10px; height:50px"><h1><p id="demo2"></p></h1>
+  <div style="position: absolute; top:5px; left:600px; width:10px; height:50px"><h1><p id="demo2"></p></h1>
   </div>
  
   <div style="position: absolute; top:80px; left:600px; width:10px; height:50px"><h1><p id="demo1"></p></h1>
