@@ -1,0 +1,16 @@
+h1 {
+    font-size: 60px;
+    text-align: center;
+}
+
+#beamstats {
+    font-size: 30px;
+    text-align: left;
+}
+
+#operationsMode
+    {
+        width: 100%;
+        height: 100px;
+        background: green;
+    }

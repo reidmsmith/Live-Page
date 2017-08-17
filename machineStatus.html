@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" type="text/css" href="machineStatus.css">
+     <script type="text/javascript" src="canvasjs.min.js"></script>
+    <h1>NSLS II Operations Status</h1>
+</head>
+<body>
+    <script>        
+        $.ajax({
+            function retrieveData() {
+                var urls = ["(SR-OPS{}Mode-Sts)", //URL endings to loop through and get data from them
+                "(SR:OPS-BI{DCCT:1}Lifetime-I)",
+                "(SR:OPS-BI{DCCT:1}I:Real-I)",
+                "(SR:C03-BI{DCCT:1}Dosage:1d-I_)"]
+
+                var opModeName = ["Operations", "Setup", "Studies", "Failure", "Maintenence", "Shutdown", "Scheduled Ops"] //lists used to set color and text that correspond to a certain operation mode
+                var opModeColor = ["green", "yellow", "#92D7FF", "red", "purple", "#CCCCCC", "pink"]
+
+                var beamStats = [opModeNum, lifetime, current, dosage] //sets variables in this list to URL output
+
+                for (i = 0; i < urls.length; i++) { //iterates through URL data and assigns them to each property in beamStats
+                    url: "http://arcapp01.cs.nsls2.local:17668/retrieval/data/getData.json?pv=lastSample_36000000" + urls[i]
+                    dataType: 'json'
+                    success: function(value) { // <---- what does this do 
+                    var beamStats[i] = (value[0].data[0].val)
+                    console.log(beamStats[i]) 
+                    }
+                }
+                document.getElementById("beamcurrent") = current //sets values for table
+                document.getElementById("beamlifetime") = lifetime + "Hrs"
+                document.getElementById("dailyamphours") = dosage + "mAh"
+
+                document.getElementById("operationsMode").style.color = opModeColor[opModeNum] //sets color and text of operation mode based on opModeNum
+                document.getElementById("operationsMode").innerHTML = opModeName[opModeNum]
+
+                lifetimeGraph.push(lifetime) //updates lists of data to be used for graphing
+                currentGraph.push(current)
+                dosageGraph.push(dosage)
+
+                if (lifetimeGraph.length >= 1000) {
+                    lifetimeGraph.splice(1, 999) //cuts first set of points on graph if the number of data points exceeds 1000
+                    currentGraph.splice(1, 999)
+                    dosageGraph.splice(1, 999)
+                }  
+            }
+
+            setInterval(retrieveData(), 5000) //runs retrieveData function every 5 seconds
+            
+        }) 
+    </script>
+    
+
+    <div id="table">
+        <table>
+            <tr>
+                <td>Beam Current</td>
+                <td id="beamcurrent"></td>
+            </tr>
+            <tr>
+                <td>Beam Lifetime</td>
+                <td id="beamlifetime"></td>
+            </tr>
+            <tr>
+                <td>Daily Amp Hours</td>
+                <td id="dailyamphours"></td>
+            </tr>
+        </table> 
+    </div>
+
+
+    <div id="operationsMode">
+    </div>
+
+
+    <div id=graph>
+        <script type="text/javascript">
+        window.onload = function () {
+	        var chart = new CanvasJS.Chart("chartContainer",
+	        {
+		        zoomEnabled: true,
+		        panEnabled: true, 
+		        title:{
+			        text: "Stored Beam Current and Lifetime" 
+	        	},
+		        legend:{
+			    horizontalAlign: "right",
+			    verticalAlign: "center"        
+		        },
+		        axisY:{
+                    title: "Current (mA)",
+		        },
+                axisY2:{  //NOT WORKING
+                    title: "Lifetime (Hr)",
+                },
+		        data: data,  // random generator below
+            });
+	        chart.render();
+        }
+	        var limit = 1000;    //increase number of dataPoints by increasing this
+	        var y = 0;
+	        var data = []; var dataSeries = { type: "line" };
+	        var dataPoints = [];
+	        for (var i = 0; i < limit; i += 1) {
+		        y += (Math.random() * 10 - 5);
+		        dataPoints.push({
+			        x: i - limit / 2,
+			        y: y                
+		        });
+	        }
+	        dataSeries.dataPoints = dataPoints;
+	        data.push(dataSeries);   
+        </script>
+        <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        <div id="chartContainer" style="height: 300px; width: 100%;">
+        </div>  
+    </div>
+
+
+    <div id="operationsMessage">
+    </div>
+
+
+</body>
